@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <title>Grab grabSlider</title>
+   <style>
+      
+      .grabSlide-img i{
+         color: rgb(255, 255, 255);
+         font-size: 4rem;
+         pointer-events: auto;
+         cursor: pointer;
+      }
+      .grabSlide-img i:hover{
+         color: rgb(167, 11, 245);
+      }
+      .grabSlider{
+         position: absolute;
+         left: 10%;
+         top: 30%;
+         width: 80%;
+         height: 200px;
+         overflow: hidden;
+      }
+      .grabSlider-inner{
+         position: absolute;
+         top: 0;
+         left: 0;
+         height: 100%;
+         width: 200%;
+         display: grid;
+         grid-template-columns: repeat(7, 1fr);
+         gap: 5px;
+         pointer-events: none;
+      }
+      .grabSlide-img{
+         height: 100%;
+         background: black;
+         text-align: center;
+         padding: 4rem;
+      }
+   </style>
+</head>
+<body>
+   <div class="grabSlider">
+      <div class="grabSlider-inner">
+         <div class="grabSlide-img">
+            <i class="fas fa-futbol"></i>
+         </div>
+         <div class="grabSlide-img">
+            <i class="fas fa-football-ball"></i>
+         </div>
+         <div class="grabSlide-img">
+            <i class="fas fa-golf-ball"></i>
+         </div>
+         <div class="grabSlide-img">
+            <i class="fas fa-biking"></i>
+         </div>
+         <div class="grabSlide-img">
+            <i class="fas fa-basketball-ball"></i>
+         </div>
+         <div class="grabSlide-img">
+            <i class="fas fa-hockey-puck"></i>
+         </div>
+         <div class="grabSlide-img">
+            <i class="fas fa-swimmer"></i>
+         </div>
+      </div>
+   </div>
+   <script>
+      let grabSlider = document.querySelector(".grabSlider");
+      let innergrabSlider = document.querySelector(".grabSlider-inner");
+
+      let pressed = false;
+      let startx;
+      let offsetX;
+
+      grabSlider.addEventListener("mousedown", (e) => {
+         pressed = true;
+         startx = e.offsetX - innergrabSlider.offsetLeft;
+         grabSlider.style.cursor = "grabbing"
+      })
+      grabSlider.addEventListener("mouseup", () => {
+         grabSlider.style.cursor = "grab"
+      })
+      window.addEventListener("mouseup", () => {
+         pressed = false;
+      })
+      grabSlider.addEventListener("mousemove", (e) => {
+         if(!pressed) return;
+         e.preventDefault();
+         offsetX = e.offsetX
+         innergrabSlider.style.left = `${offsetX - startx}px`
+      })
+      </script>
+      </body>
+      </head>
+      </html>
